@@ -242,5 +242,16 @@ df = pd.read_csv("Garment_Job_Risk.csv")
 # print(df.nsmallest(1, "Working_Hours_Per_Week"))
 
 ############ Blank value check ###############
-print((df["Exposure_To_Chemicals"].str.strip() == "").sum())
-print(df["Exposure_To_Chemicals"].isnull().sum())
+# print((df["Exposure_To_Chemicals"].str.strip() == "").sum())
+# print(df["Exposure_To_Chemicals"].isnull().sum())
+
+
+print(df.info(verbose=True))
+# print(pd.options.display.max_info_columns)
+
+import io
+buffer = io.StringIO()
+df.info(buf=buffer)
+s = buffer.getvalue()
+with open("df_info.txt", "w", encoding="utf-8") as f:
+    f.write(s)

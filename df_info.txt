@@ -1,0 +1,21 @@
+<class 'pandas.DataFrame'>
+RangeIndex: 2500 entries, 0 to 2499
+Data columns (total 14 columns):
+ #   Column                   Non-Null Count  Dtype
+---  ------                   --------------  -----
+ 0   Name                     2500 non-null   str  
+ 1   Garment_Name             2500 non-null   str  
+ 2   Experience_Years         2500 non-null   int64
+ 3   Job_Role                 2500 non-null   str  
+ 4   Working_Hours_Per_Week   2500 non-null   int64
+ 5   Exposure_To_Chemicals    1276 non-null   str  
+ 6   Machine_Use              2046 non-null   str  
+ 7   Workstation_Ergonomics   2500 non-null   str  
+ 8   Injury_History           2500 non-null   int64
+ 9   Health_Condition         2500 non-null   str  
+ 10  Safety_Training          2062 non-null   str  
+ 11  Shift_Type               2500 non-null   str  
+ 12  Task_Rotation_Frequency  2500 non-null   str  
+ 13  Job_Risk                 2500 non-null   str  
+dtypes: int64(3), str(11)
+memory usage: 273.6 KB
