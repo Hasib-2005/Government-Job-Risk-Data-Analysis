@@ -29,7 +29,8 @@ df.loc[df["Working_Hours_Per_Week"] > 60, "Working_Hours_Per_Week"] = 56
 # print("********  After cleaning Null counts  **********")
 # print(df.isnull().sum())
 # Save cleaned dataset
-df.to_csv("Garment_Job_Risk_Cleaned.csv", index=False)
+# df.to_csv("Garment_Job_Risk_Cleaned.csv", index=False)
 
 print("Cleaned dataset saved successfully!")
+df.to_excel("Garment_Job_Risk_Cleanedd.xlsx", index=False)
 

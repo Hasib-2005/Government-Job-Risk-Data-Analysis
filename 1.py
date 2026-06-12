@@ -4,39 +4,39 @@ from pandas.core.dtypes import dtypes
 df = pd.read_csv("Garment_Job_Risk.csv")
 
 ###########   Dataset Overview   ###########
-print(df.head()) # default 1st 5 rows, if we add value then 1st nth rows
-print(df.tail()) # default last 5 rows, if we add value then last nth rows
-
-print(df.sample(2)) # random rows
-
-print(df.shape) # print (rows, column)
-
-print(df.columns) # prints column names
-
-print(df.dtypes) # prints datatypes of column headers
-
-print(df.info()) # prints non null value count and datatypes of each column
-
-print(df.to_string())
-print(df.describe()) # prints count, mean, std, min, max, 25%, 50%, 75% of the numeric columns
+# print(df.head()) # default 1st 5 rows, if we add value then 1st nth rows
+# print(df.tail()) # default last 5 rows, if we add value then last nth rows
+#
+# print(df.sample(2)) # random rows
+#
+# print(df.shape) # print (rows, column)
+#
+# print(df.columns) # prints column names
+#
+# print(df.dtypes) # prints datatypes of column headers
+#
+# print(df.info()) # prints non null value count and datatypes of each column
+#
+# print(df.to_string())
+# print(df.describe()) # prints count, mean, std, min, max, 25%, 50%, 75% of the numeric columns
 
 
 ############ Missing Value Analysis ##############
-print(df.isnull()) # returns the whole dataframe with boolean values(if null value, prints true, else false)
-
-print(df.isnull().sum()) # prints every columns total null value count
-
-print(df.isna().sum()) # same as isnull.sum
-
-print(df["Working_Hours_Per_Week"].mean()) # prints mean of that numeric column
-
-print(df["Working_Hours_Per_Week"].median()) # prints median of that numeric column
-
-print(df["Working_Hours_Per_Week"].mode()[0]) # prints mode of that numeric column ** [0] for multiple mods first value
-
-df["Working_Hours_Per_Week"] = df["Working_Hours_Per_Week"].fillna(df["Working_Hours_Per_Week"].mean()) # fills all null values of "Working_Hours_Per_Week" column with mean value of the column
-
-print(df["Working_Hours_Per_Week"])
+# print(df.isnull()) # returns the whole dataframe with boolean values(if null value, prints true, else false)
+#
+# print(df.isnull().sum()) # prints every columns total null value count
+#
+# print(df.isna().sum()) # same as isnull.sum
+#
+# print(df["Working_Hours_Per_Week"].mean()) # prints mean of that numeric column
+#
+# print(df["Working_Hours_Per_Week"].median()) # prints median of that numeric column
+#
+# print(df["Working_Hours_Per_Week"].mode()[0]) # prints mode of that numeric column ** [0] for multiple mods first value
+#
+# df["Working_Hours_Per_Week"] = df["Working_Hours_Per_Week"].fillna(df["Working_Hours_Per_Week"].mean()) # fills all null values of "Working_Hours_Per_Week" column with mean value of the column
+#
+# print(df["Working_Hours_Per_Week"])
 
 
 ############  Duplicate Handling  ############
@@ -131,5 +131,116 @@ print(df["Working_Hours_Per_Week"])
 
 ########## Backward Fill (BFill) ############
 # df["Working_Hours_Per_Week"] = df["Working_Hours_Per_Week"].bfill()
-print("********  Before cleaning Null counts  **********")
-print(df.isnull().sum())
+# print("********  Before cleaning Null counts  **********")
+# print(df.isnull().sum())
+
+
+# newww
+
+############ Column Selection ############
+
+# Single column select (returns Series)
+# print(df["Experience_Years"])
+
+# Multiple columns select (returns DataFrame)
+# print(df[["Experience_Years", "Working_Hours_Per_Week"]])
+
+
+############ loc[] (Label Based Selection) ############
+
+# First row select
+# print(df.loc[0])
+
+# First row's Experience_Years value
+# print(df.loc[0, "Experience_Years"])
+
+# Rows 0 to 5 and selected columns
+# print(df.loc[0:5, ["Experience_Years", "Working_Hours_Per_Week"]])
+
+# All rows but only selected columns
+# print(df.loc[:, ["Job_Role", "Job_Risk"]])
+
+
+############ iloc[] (Index Based Selection) ############
+
+# First row select
+# print(df.iloc[0])
+
+# First row, second column value
+# print(df.iloc[0, 1])
+
+# First 5 rows
+# print(df.iloc[0:5])
+
+# First 5 rows and first 3 columns
+# print(df.iloc[0:5, 0:3])
+
+
+############ Unique Values Analysis ############
+
+# All unique job roles
+# print(df["Job_Role"].unique())
+
+# Total number of unique job roles
+# print(df["Job_Role"].nunique())
+
+# Count occurrences of each job role
+# print(df["Job_Role"].value_counts())
+
+# Count occurrences of Job_Risk categories
+# print(df["Job_Risk"].value_counts())
+
+
+############ Rename Columns ############
+
+# Rename a column
+# df.rename(columns={
+#     "Experience_Years": "Experience"
+# }, inplace=True)
+#
+# print(df.columns)
+
+
+############ Drop Columns ############
+
+# Remove one column permanently
+# df.drop("Injury_History", axis=1, inplace=True)
+# print(df.columns)
+# Remove multiple columns
+# df.drop(["Injury_History", "Task_Rotation_Frequency"], axis=1, inplace=True)
+
+# print(df.head())
+
+
+############ Export Dataset ############
+
+# Save cleaned dataframe as csv
+# df.to_csv("Garment_Job_Risk_Cleaned.csv", index=False)
+
+# Save cleaned dataframe as excel
+# df.to_excel("Garment_Job_Risk_Cleaned.xlsx", index=False)
+
+
+############ Useful Extra Commands ############
+
+# Total values in each column
+# print(df.count())
+
+# Number of rows for each Job_Risk category
+# print(df["Job_Risk"].value_counts())
+
+# Percentage of each Job_Risk category
+# print(df["Job_Risk"].value_counts(normalize=True) * 100)
+
+# Correlation between numeric columns
+# print(df.corr(numeric_only=True))
+
+# Highest working hours employee
+# print(df.nlargest(1, "Working_Hours_Per_Week"))
+
+# Lowest working hours employee
+# print(df.nsmallest(1, "Working_Hours_Per_Week"))
+
+############ Blank value check ###############
+print((df["Exposure_To_Chemicals"].str.strip() == "").sum())
+print(df["Exposure_To_Chemicals"].isnull().sum())
